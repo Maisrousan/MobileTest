@@ -100,19 +100,8 @@ public class MyTestCase {
 
 	}
 
-	@Test(enabled = false)
-	public void PressOnEvenNumbers2() {
-
-		List<WebElement> AllButtons = driver.findElements(By.className("android.widget.ImageButton"));
-
-		for (int i = 0; i < AllButtons.size(); i++) {
-			;
-			System.out.println(AllButtons.get(i).getDomAttribute("content-desc"));
-		}
-	}
-
 	@Test
-	public void pressOnEvenNumbersOnly() {
+	public void pressOnEvenNumbers2() {
 		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
 		for (WebElement button : allButtons) {
