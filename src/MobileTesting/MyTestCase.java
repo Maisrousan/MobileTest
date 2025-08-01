@@ -2,7 +2,7 @@ package MobileTesting;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL ;
+import java.net.URL;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -17,121 +17,116 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class MyTestCase {
 
-	AndroidDriver  driver ; 
+	AndroidDriver driver;
 	DesiredCapabilities cap = new DesiredCapabilities();
-	
-	@BeforeTest 
-	public void MySetUp () {
-		
-		cap.setCapability("platformName" , "Android");
-		cap.setCapability("appium:deviceName" , "ABCD");
-		
-		File MyApp = new File ("src/MyApplication/calculator.apk");
-		cap.setCapability("appium:app", "MyApp.getAbsolutePath()" );
+
+	@BeforeTest
+	public void MySetUp() {
+
+		cap.setCapability("platformName", "Android");
+		cap.setCapability("appium:deviceName", "ABCD");
+
+		File MyApp = new File("src/MyApplication/calculator.apk");
+		cap.setCapability("appium:app", "MyApp.getAbsolutePath()");
 	}
-	
-	
-	
+
 	@BeforeMethod
-	public void beforeEachTest() throws MalformedURLException {
-		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),cap);}
-	
-	
-	@Test 
-	public void MyFirstTest () throws MalformedURLException {
-		driver.findElement(By.id("com.google.android.calculator:id/digit_9")).click();
-
-		driver.findElement(By.id("com.google.android.calculator:id/op_mul")).click();
-
-		driver.findElement(By.id("com.google.android.calculator:id/digit_6")).click();
-
-		String theResults = driver.findElement(By.id("com.google.android.calculator:id/result_preview")).getText();
-
-		System.out.println(theResults);
-
-		Assert.assertEquals(theResults, "54");
-		
-		
+	public void BeforeEachTest() throws MalformedURLException {
+		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), cap);
 	}
-	
-	
+
+	@Test
+	public void MyFirstTest() throws MalformedURLException {
+		WebElement Number8 = driver.findElement(By.id("com.google.android.calculator:id/digit_8"));
+		WebElement MultiplicationSigns=  driver.findElement(By.id("com.google.android.calculator:id/op_mul"));
+		WebElement Number5 = driver.findElement(By.id("com.google.android.calculator:id/digit_5"));
+		
+		Number8.click();
+		MultiplicationSigns.click();
+		Number5.click();
+
+		String TheResults = driver.findElement(By.id("com.google.android.calculator:id/result_preview")).getText();
+
+		System.out.println(TheResults);
+
+		Assert.assertEquals(TheResults, "40");
+
+	}
+
 	@Test(enabled = false)
-	public void pressOnAllButtons() {
+	public void PressOnAllButtons() {
 
-		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
+		List<WebElement> AllButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
-		for (int i = 0; i < allButtons.size(); i++) {
-			allButtons.get(i).click();
+		for (int i = 0; i < AllButtons.size(); i++) {
+			AllButtons.get(i).click();
 		}
 	}
 
 	@Test(enabled = false)
-	public void pressOnAllNumbers() {
+	public void PressOnAllNumbers() {
 
-		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
+		List<WebElement> AllButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
-		for (int i = 0; i < allButtons.size(); i++) {
+		for (int i = 0; i < AllButtons.size(); i++) {
 
-			if (allButtons.get(i).getDomAttribute("resource-id").contains("digit")) {
-				allButtons.get(i).click();
+			if (AllButtons.get(i).getDomAttribute("resource-id").contains("digit")) {
+				AllButtons.get(i).click();
 
 			}
 		}
 
-		String actualResutl = driver.findElement(By.id("com.google.android.calculator:id/formula")).getText();
+		String ActualResutl = driver.findElement(By.id("com.google.android.calculator:id/formula")).getText();
 
-		Assert.assertEquals(actualResutl, "7894561230");
+		Assert.assertEquals(ActualResutl, "7894561230");
 	}
 
 	@Test(enabled = false)
-	public void pressonEvenNumbers() {
+	public void PressOnEvenNumbers() {
 
-		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
+		List<WebElement> AllButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
-		for (int i = 0; i < allButtons.size(); i++) {
+		for (int i = 0; i < AllButtons.size(); i++) {
 
-			if (allButtons.get(i).getDomAttribute("resource-id").contains("8")
-					|| allButtons.get(i).getDomAttribute("resource-id").contains("6")
-					|| allButtons.get(i).getDomAttribute("resource-id").contains("4")
-					|| allButtons.get(i).getDomAttribute("resource-id").contains("2")
-					|| allButtons.get(i).getDomAttribute("resource-id").contains("0")) {
-				allButtons.get(i).click();
+			if (AllButtons.get(i).getDomAttribute("resource-id").contains("8")
+					|| AllButtons.get(i).getDomAttribute("resource-id").contains("6")
+					|| AllButtons.get(i).getDomAttribute("resource-id").contains("4")
+					|| AllButtons.get(i).getDomAttribute("resource-id").contains("2")
+					|| AllButtons.get(i).getDomAttribute("resource-id").contains("0")) {
+				AllButtons.get(i).click();
 
 			}
 		}
 
 	}
-	
-	
+
 	@Test(enabled = false)
-	public void pressonEvenNumbers2() {
+	public void PressOnEvenNumbers2() {
 
-		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
+		List<WebElement> AllButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
-		for(int i = 0 ; i < allButtons.size();i++) {
+		for (int i = 0; i < AllButtons.size(); i++) {
 			;
-			System.out.println(allButtons.get(i).getDomAttribute("content-desc"));
+			System.out.println(AllButtons.get(i).getDomAttribute("content-desc"));
 		}
-		}
-	
+	}
+
 	@Test
 	public void pressOnEvenNumbersOnly() {
-	    List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
+		List<WebElement> allButtons = driver.findElements(By.className("android.widget.ImageButton"));
 
-	    for (WebElement button : allButtons) {
-	        String label = button.getDomAttribute("content-desc");
+		for (WebElement button : allButtons) {
+			String label = button.getDomAttribute("content-desc");
 
-	        // Check if it's a digit and also an even number
-	        if (label != null && label.matches("\\d")) {
-	            int num = Integer.parseInt(label);
-	            if (num % 2 == 0) {
-	                System.out.println("Clicking even number: " + num);
-	                button.click();
-	            }
-	        }
-	    }
+			// Check if it's a digit and also an even number
+			if (label != null && label.matches("\\d")) {
+				int num = Integer.parseInt(label);
+				if (num % 2 == 0) {
+					System.out.println("Clicking even number: " + num);
+					button.click();
+				}
+			}
+		}
 	}
 
-
-	
 }
